@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite 3D Cube</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            perspective: 1000px; /* Добавляем перспективу для 3D-эффекта */
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+        .block {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: white;
+        }
+        .top {
+    background: url("img/lis1.webp") no-repeat center/cover;
+    transform: rotateX(90deg) translateZ(50vh);
+}
+
+.main {
+    background: url("img/lis2.webp") no-repeat center/cover;
+    transform:  translateZ(50vh);
+}
+
+.undermain {
+    background: url("img/lis3.webp") no-repeat center/cover;
+    transform: rotateX(-90deg) translateZ(50vh);
+}
+
+.bottom {
+    background: url("img/lis4.webp") no-repeat center/cover;
+    transform: rotateX(180deg) translateZ(50vh);
+}
+
+
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="block top">
+            <h1>Плюсы купить лису:</h1>
+            
+        </div>
+        <div class="block main">Main</div>
+        <div class="block undermain">Under Main</div>
+        <div class="block bottom">Bottom</div>
+
+    </div>
+
+    <script>
+        let container = document.querySelector('.container');
+        let currentRotation = 0;
+        let rotationStep = 90;
+    
+
+        window.addEventListener('wheel', (event) => {
+            event.preventDefault();
+
+            if (event.deltaY > 0) {                
+                currentRotation += rotationStep;
+            } else if (event.deltaY < 0) {                
+                currentRotation -= rotationStep;
+                        }            
+            container.style.transform = `rotateX(${currentRotation}deg)`;
+        });
+    </script>
+</body>
+</html>

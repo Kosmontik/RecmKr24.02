@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite 3D Cube</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            transform-style: preserve-3d;
+            transition: transform 0.5s; /* Reduced transition for smoother effect */
+        }
+        .block {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: white;
+            backface-visibility: hidden; /* Prevents mirrored text */
+        }
+
+        /* Example block styling (adjust as needed) */
+        .block:nth-child(1) {
+            background: url("img/lis1.webp") no-repeat center/cover;
+            transform: rotateX(0deg) translateZ(50vh);
+        }
+
+        .block:nth-child(2) {
+            background: url("img/lis2.webp") no-repeat center/cover;
+            transform: rotateX(90deg) translateZ(50vh);
+        }
+
+        .block:nth-child(3) {
+            background: url("img/lis3.webp") no-repeat center/cover;
+            transform: rotateX(180deg) translateZ(50vh);
+        }
+
+        .block:nth-child(4) {
+            background: url("img/lis4.webp") no-repeat center/cover;
+            transform: rotateX(270deg) translateZ(50vh);
+        }
+        .block:nth-child(5) {
+    background: url("img/lis5.webp") no-repeat center/cover;
+    transform: rotateX(360deg) translateZ(50vh);
+}
+
+        /* Add more block styles using :nth-child(n) for n > 4 */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="block">Block 1</div>
+        <div class="block">Block 2</div>
+        <div class="block">Block 3</div>
+        <div class="block">Block 4</div>
+        <div class="block">Block 5</div>
+        <!-- Add as many blocks as you want -->
+    </div>
+
+    <script>
+        const container = document.querySelector('.container');
+        let currentRotation = 0;
+        const blockCount = document.querySelectorAll('.block').length; 
+        const rotationStep = 360 / blockCount;  
+        console.log("Total of Blocks:" + blockCount)
+
+        window.addEventListener('wheel', (event) => {
+            // event.addEventListener(handleEvent,{passive:false});
+            const scrollDirection = event.deltaY > 0 ? 1 : -1;
+            currentRotation += scrollDirection * rotationStep;
+            container.style.transform = `rotateX(${currentRotation}deg)`;
+        });
+    </script>
+</body>
+</html>
