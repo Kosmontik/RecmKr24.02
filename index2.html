@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- Устанавливает кодировку символов для страницы (UTF-8 поддерживает большинство символов) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Конфигурирует viewport для адаптивного отображения на разных устройствах -->
+    <title>3D Cube Scroll</title> <!-- Устанавливает заголовок страницы, который отображается в заголовке вкладки браузера -->
+    <style>
+        body, html {
+            margin: 0; /* Убирает внешние отступы у элементов body и html */
+            padding: 0; /* Убирает внутренние отступы у элементов body и html */
+            height: 100%; /* Устанавливает высоту элементов body и html на 100% высоты окна браузера */
+            width: 100%; /* Устанавливает ширину элементов body и html на 100% ширины окна браузера */
+            overflow: hidden; /* Скрывает все элементы, которые выходят за границы элементов body и html, предотвращая появление полос прокрутки */
+            perspective: 1000px; /* Устанавливает перспективу для 3D-трансформаций (чем меньше значение, тем сильнее эффект перспективы) */
+        }
+        .container {
+            width: 100vw; /* Устанавливает ширину контейнера на 100% ширины viewport (видимой области окна браузера) */
+            height: 100vh; /* Устанавливает высоту контейнера на 100% высоты viewport */
+            transform-style: preserve-3d; /* Позволяет дочерним элементам сохранять свои 3D-трансформации, чтобы они отображались в 3D-пространстве */
+            transition: transform 1s; /* Добавляет плавный переход для свойства transform, длительностью 1 секунда */
+        }
+        .block {
+            width: 100vw; /* Устанавливает ширину блока на 100% ширины viewport */
+            height: 100vh; /* Устанавливает высоту блока на 100% высоты viewport */
+            position: absolute; /* Позиционирует блок абсолютно относительно ближайшего позиционированного родителя (в данном случае, container) */
+            top: 0; /* Располагает верхний край блока вверху контейнера */
+            left: 0; /* Располагает левый край блока слева контейнера */
+            display: flex; /* Использует Flexbox для выравнивания содержимого блока */
+            justify-content: center; /* Выравнивает содержимое по горизонтали по центру */
+            align-items: center; /* Выравнивает содержимое по вертикали по центру */
+            font-size: 2rem; /* Устанавливает размер шрифта текста в блоке */
+            color: white; /* Устанавливает цвет текста в блоке белым */
+        }
+    </style>
+</head>
+<body>
+    <div class="container"> <!-- Основной контейнер для 3D-куба -->
+       
+        <div class="block" style="background: url('img/lis1.webp') no-repeat center/cover;">1</div> 
+        <div class="block" style="background: url('img/lis2.webp') no-repeat center/cover;">2</div> 
+        <div class="block" style="background: url('img/lis3.webp') no-repeat center/cover;">3</div> 
+        <div class="block" style="background: url('img/lis4.webp') no-repeat center/cover;">4</div> 
+        <!-- <div class="block" style="background: url('img/lis5.webp') no-repeat center/cover;">5</div>  -->
+        
+
+        </div>
+
+    <script>
+        let container = document.querySelector('.container');       
+        let blocks = document.querySelectorAll('.block'); 
+        let currentRotation = 0; 
+        let rotationStep = 360 / blocks.length; 
+
+        
+        blocks.forEach((block, index) => { 
+            let angle = rotationStep * index; 
+            block.style.transform = `rotateY(${angle}deg) translateZ(50vh)`; 
+        });
+
+        window.addEventListener('wheel', (event) => { 
+            event.preventDefault(); 
+            if (event.deltaY > 0) { 
+                currentRotation += rotationStep; 
+            } else if (event.deltaY < 0) { 
+                currentRotation -= rotationStep; 
+            }
+            container.style.transform = `rotateX(${currentRotation}deg)`; 
+        });
+        blocks.forEach((block, index) => { 
+            let angle = rotationStep * index; 
+            block.style.transform = `rotateX(${angle}deg) translateZ(50vh)`; 
+        });
+
+        window.addEventListener('wheel', (event) => { 
+            if(event.shiftKey){
+                event.preventDefault(); 
+            if (event.deltaY > 0) { 
+                currentRotation += rotationStep; 
+            } else if (event.deltaY < 0) { 
+                currentRotation -= rotationStep; 
+            }
+            container.style.transform = `rotateY(${currentRotation}deg)`; 
+            }
+        });
+    </script>
+</body>
+</html>

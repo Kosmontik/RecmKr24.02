@@ -173,3 +173,26 @@
     </script>
 </body>
 </html> -->
+
+<script>
+        let container = document.querySelector('.container'); // Получаем ссылку на элемент с классом 'container'
+        let blocks = document.querySelectorAll('.block'); // Получаем список всех элементов с классом 'block'
+        let currentRotation = 0; // Инициализируем переменную для хранения текущего угла поворота
+        let rotationStep = 360 / blocks.length; // Рассчитываем шаг вращения для каждого блока, чтобы равномерно распределить их по окружности
+
+        // Устанавливаем начальные трансформации для каждого блока
+        blocks.forEach((block, index) => { // Перебираем все блоки
+            let angle = rotationStep * index; // Рассчитываем угол поворота для каждого блока
+            block.style.transform = `rotateY(${angle}deg) translateZ(50vh)`; // Устанавливаем трансформацию для каждого блока: поворот по оси X на вычисленный угол и смещение по оси Z на 50% высоты viewport (создает эффект 3D-расположения)
+        });
+
+        window.addEventListener('wheel', (event) => { // Добавляем обработчик события 'wheel' (колесо прокрутки) на окно браузера
+            event.preventDefault(); // Предотвращаем стандартное поведение прокрутки страницы
+            if (event.deltaY > 0) { // Если прокрутка вниз (deltaY > 0)
+                currentRotation += rotationStep; // Увеличиваем угол поворота на шаг вращения
+            } else if (event.deltaY < 0) { // Если прокрутка вверх (deltaY < 0)
+                currentRotation -= rotationStep; // Уменьшаем угол поворота на шаг вращения
+            }
+            container.style.transform = `rotateY(${currentRotation}deg)`; // Устанавливаем трансформацию для контейнера: поворот по оси X на текущий угол поворота (анимирует вращение куба)
+        });
+    </script>
