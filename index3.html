@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
+    <!-- <style>
         body, html {
             margin: 0; 
             padding: 0; 
@@ -74,6 +74,135 @@
                 currentRotation-=rotationStep;
             }
             container.style.transform=`rotateX(${currentRotation}deg)`;
+        });
+    </script> -->
+    <style>
+        body, html {
+            margin: 0; 
+            padding: 0; 
+            height: 100%; 
+            width: 100%; 
+            overflow: hidden;
+            perspective: 1000px; 
+        }
+        .container {
+            width: 100vw; 
+            height: 100vh;
+            transform-style: preserve-3d; 
+            transition: transform 1s; 
+        }
+        .block {
+            width: 100vw; 
+            height: 100vh; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            font-size: 2rem; 
+            color: black; 
+            background: white;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="block">
+            <h2>Форма 1</h2>
+            <form>
+                <label for="name">Имя:</label><br>
+                <input type="text" id="name" name="name"><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"><br>
+                <input type="submit" value="Отправить">
+            </form>
+        </div> 
+        <div class="block">
+            <h2>Таблица 1</h2>
+            <table border="1">
+                <tr>
+                    <th>Наименование</th>
+                    <th>Количество</th>
+                    <th>Цена</th>
+                </tr>
+                <tr>
+                    <td>Товар 1</td>
+                    <td>10</td>
+                    <td>$100</td>
+                </tr>
+                <tr>
+                    <td>Товар 2</td>
+                    <td>15</td>
+                    <td>$150</td>
+                </tr>
+            </table>
+        </div> 
+        <div class="block">
+            <h2>Форма 2</h2>
+            <form>
+                <label for="feedback">Ваш отзыв:</label><br>
+                <textarea id="feedback" name="feedback" rows="4" cols="30"></textarea><br>
+                <input type="submit" value="Отправить">
+            </form>
+        </div> 
+        <div class="block">
+            <h2>Таблица 2</h2>
+            <table border="1">
+                <tr>
+                    <th>Дата</th>
+                    <th>Событие</th>
+                </tr>
+                <tr>
+                    <td>01/01/2023</td>
+                    <td>Новый год</td>
+                </tr>
+                <tr>
+                    <td>08/03/2023</td>
+                    <td>Международный женский день</td>
+                </tr>
+            </table>
+        </div> 
+        <div class="block">
+            <h2>Информация</h2>
+            <p>Этот блок может содержать любую информацию или текст.</p>
+        </div> 
+    </div>
+
+    <script>
+        let container = document.querySelector('.container'); 
+        let blocks = document.querySelectorAll('.block'); 
+        let currentRotation = 0;
+        let rotationStep = 360 / blocks.length;
+
+        window.addEventListener('wheel', (event) => { 
+            event.preventDefault(); 
+            if (event.deltaY > 0) { 
+                currentRotation += rotationStep;
+            } else if (event.deltaY < 0) {
+                currentRotation -= rotationStep;
+            }
+            blocks.forEach((block, index) => {
+                let angle = rotationStep * index;
+                block.style.transform = `rotateY(${angle}deg) translateZ(65.7vh)`;
+            });
+            container.style.transform = `rotateY(${currentRotation}deg)`;
+        });
+
+        window.addEventListener('mousedown', (event) => {
+            event.preventDefault();
+            if (event.clientY > 0) {
+                currentRotation += rotationStep;
+            } else if (event.clientY < 0) {
+                currentRotation -= rotationStep;
+            }
+            blocks.forEach((block, index) => {
+                let angle = rotationStep * index;
+                block.style.transform = `rotateX(${angle}deg) translateZ(65.7vh)`;
+            });
+            container.style.transform = `rotateX(${currentRotation}deg)`;
         });
     </script>
 </body>
