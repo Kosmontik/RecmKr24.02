@@ -196,3 +196,5 @@
             container.style.transform = `rotateY(${currentRotation}deg)`; // Устанавливаем трансформацию для контейнера: поворот по оси X на текущий угол поворота (анимирует вращение куба)
         });
     </script>
+
+    https://blog.olivierlarose.com/tutorials/3d-cube
