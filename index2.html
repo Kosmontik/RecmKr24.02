@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"> <!-- Устанавливает кодировку символов для страницы (UTF-8 поддерживает большинство символов) -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Конфигурирует viewport для адаптивного отображения на разных устройствах -->
-    <title>3D Cube Scroll</title> <!-- Устанавливает заголовок страницы, который отображается в заголовке вкладки браузера -->
-    <style>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>3D Cube Scroll</title> 
+    <!-- <style>
         body, html {
-            margin: 0; /* Убирает внешние отступы у элементов body и html */
-            padding: 0; /* Убирает внутренние отступы у элементов body и html */
-            height: 100%; /* Устанавливает высоту элементов body и html на 100% высоты окна браузера */
-            width: 100%; /* Устанавливает ширину элементов body и html на 100% ширины окна браузера */
-            overflow: hidden; /* Скрывает все элементы, которые выходят за границы элементов body и html, предотвращая появление полос прокрутки */
-            perspective: 1000px; /* Устанавливает перспективу для 3D-трансформаций (чем меньше значение, тем сильнее эффект перспективы) */
+            margin: 0; 
+            padding: 0; 
+            height: 100%; 
+            width: 100%; 
+            overflow: hidden; 
+            perspective: 1000px; 
         }
         .container {
-            width: 100vw; /* Устанавливает ширину контейнера на 100% ширины viewport (видимой области окна браузера) */
-            height: 100vh; /* Устанавливает высоту контейнера на 100% высоты viewport */
-            transform-style: preserve-3d; /* Позволяет дочерним элементам сохранять свои 3D-трансформации, чтобы они отображались в 3D-пространстве */
-            transition: transform 1s; /* Добавляет плавный переход для свойства transform, длительностью 1 секунда */
+            width: 100vw; 
+            height: 100vh; 
+            transform-style: preserve-3d; 
+            transition: transform 1s; 
         }
         .block {
-            width: 100vw; /* Устанавливает ширину блока на 100% ширины viewport */
-            height: 100vh; /* Устанавливает высоту блока на 100% высоты viewport */
-            position: absolute; /* Позиционирует блок абсолютно относительно ближайшего позиционированного родителя (в данном случае, container) */
-            top: 0; /* Располагает верхний край блока вверху контейнера */
-            left: 0; /* Располагает левый край блока слева контейнера */
-            display: flex; /* Использует Flexbox для выравнивания содержимого блока */
-            justify-content: center; /* Выравнивает содержимое по горизонтали по центру */
-            align-items: center; /* Выравнивает содержимое по вертикали по центру */
-            font-size: 2rem; /* Устанавливает размер шрифта текста в блоке */
-            color: white; /* Устанавливает цвет текста в блоке белым */
+            width: 100vw; 
+            height: 100vh; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            font-size: 2rem;
+            color: white; 
         }
     </style>
 </head>
 <body>
-    <div class="container"> <!-- Основной контейнер для 3D-куба -->
+    <div class="container"> 
        
         <div class="block" style="background: url('img/lis1.webp') no-repeat center/cover;">1</div> 
         <div class="block" style="background: url('img/lis2.webp') no-repeat center/cover;">2</div> 
         <div class="block" style="background: url('img/lis3.webp') no-repeat center/cover;">3</div> 
         <div class="block" style="background: url('img/lis4.webp') no-repeat center/cover;">4</div> 
-        <!-- <div class="block" style="background: url('img/lis5.webp') no-repeat center/cover;">5</div>  -->
+        
         
 
         </div>
@@ -82,6 +82,90 @@
             container.style.transform = `rotateY(${currentRotation}deg)`; 
             }
         });
-    </script>
-</body>
+    </script> -->
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            position: relative;
+        }
+        .block {
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: white;
+            backface-visibility: hidden;
+        }
+        .block:nth-child(1) {
+            background: url('img/lis1.webp') no-repeat center/cover;
+            transform: rotateY(0deg) translateZ(50vh);
+        }
+        .block:nth-child(2) {
+            background: url('img/lis2.webp') no-repeat center/cover;
+            transform: rotateY(90deg) translateZ(50vh);
+        }
+        .block:nth-child(3) {
+            background: url('img/lis3.webp') no-repeat center/cover;
+            transform: rotateY(180deg) translateZ(50vh);
+        }
+        .block:nth-child(4) {
+            background: url('img/lis4.webp') no-repeat center/cover;
+            transform: rotateY(-90deg) translateZ(50vh);
+        }
+        .block:nth-child(5) {
+            background: url('img/lis5.webp') no-repeat center/cover;
+            transform: rotateX(90deg) translateZ(50vh);
+        }
+        .block:nth-child(6) {
+            background: url('img/lis6.webp') no-repeat center/cover;
+            transform: rotateX(-90deg) translateZ(50vh);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+</div>
+
+<script>
+    const container = document.querySelector('.container');
+    let currentRotationX = 0;
+    let currentRotationY = 0;
+
+    window.addEventListener('wheel', (event) => {
+        event.preventDefault();
+        const scrollDirection = event.deltaY > 0 ? 1 : -1;
+
+        if (event.shiftKey) {
+            currentRotationY += scrollDirection * 7;
+        } else {
+            currentRotationX += scrollDirection * 7; 
+        }
+        
+        container.style.transform = `rotateX(${currentRotationX}deg) rotateY(${currentRotationY}deg)`; 
+    });
+</script>
+    </body>
 </html>
